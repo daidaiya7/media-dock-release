@@ -6,9 +6,9 @@
 
 支持对接 Emby、NextEmby、NextFind 和 TMDB，并保留闲鱼、小红书渠道模块。服务地址、域名、Token、平台账号、商品和付款入口均由部署者自行配置。平台不附带影片、媒体服务账号、CDN 或支付渠道。
 
-**当前版本：1.1.0 · 支持 Docker 直接拉取部署。**
+**当前版本：1.1.0 · 已提供可直接安装的 Docker 镜像与安装脚本。**
 
-本仓库公开项目介绍、部署模板及使用说明，**不包含应用源码、账号或业务数据**。应用以容器镜像分发，镜像公开拉取，无需 GitHub Token 或维护者授权：
+本仓库公开项目介绍、部署模板及使用说明，**不包含应用源码、账号或业务数据**。应用以容器镜像分发。公开发行页提供可直接导入的镜像与安装脚本，无需 GitHub Token。GHCR 镜像地址（匿名拉取权限待开放）：
 
 ```text
 ghcr.io/daidaiya7/mediadock:1.1.0
@@ -31,6 +31,8 @@ ghcr.io/daidaiya7/mediadock:1.1.0
 - 独立数据卷与凭据卷，便于备份和迁移。
 
 ## Docker 部署
+
+**推荐首次安装使用下方安装脚本**：从 GitHub Release 下载镜像并校验、导入和启动，不需要镜像仓库账号。GHCR 镜像已上传，匿名拉取权限尚待开放；若下面的 `docker compose pull` 提示 denied，请直接使用「镜像仓库不可达时安装」。
 
 安装 Docker 与 Docker Compose v2。镜像支持 `linux/amd64` 和 `linux/arm64`，适用于常见 x86-64 Linux 服务器、ARM64 设备，以及使用 Docker Desktop 的 Intel / Apple Silicon Mac 和 Windows 电脑。Windows 请启用 Linux 容器模式。
 
