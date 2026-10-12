@@ -10,3 +10,5 @@ backups/
 *.log
 *.zip
 __pycache__/
+
+.downloads/

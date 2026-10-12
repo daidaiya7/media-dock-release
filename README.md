@@ -2,17 +2,21 @@
 
 **MediaDock — Self-hosted Media Service Portal**
 
-影视服为自托管媒体服务提供统一的观影门户，集成影视库预览、影片搜索、求片订阅、套餐展示、订单管理和卡密交付。黑金界面搭配可编辑公告、使用教程及线路状态，让用户从了解片库到购买、领取和使用服务，都能在同一个入口完成。
+影视服为自托管媒体服务提供统一的观影门户，集成影视库预览、影片搜索、求片订阅、套餐展示、订单管理和卡密交付。可自定义的站点外观、昼夜主题、公告和使用教程，让用户从了解片库到购买、领取和使用服务，都能在同一个入口完成。
 
 支持对接 Emby、NextEmby、NextFind 和 TMDB，并保留闲鱼、小红书渠道模块。服务地址、域名、Token、平台账号、商品和付款入口均由部署者自行配置。平台不附带影片、媒体服务账号、CDN 或支付渠道。
 
-**当前版本：1.0.0 · 部署资料已发布，容器镜像待提供。**
+**当前版本：1.1.0 · 支持 Docker 直接拉取部署。**
 
-本仓库公开项目介绍、部署模板及使用说明，**不包含应用源码、账号或业务数据**。仅下载这些文件还不能启动应用，需先取得维护者提供的容器镜像及拉取权限。
+本仓库公开项目介绍、部署模板及使用说明，**不包含应用源码、账号或业务数据**。应用以容器镜像分发，镜像公开拉取，无需 GitHub Token 或维护者授权：
 
-- [下载 v1.0.0 部署资料](https://github.com/daidaiya7/media-dock-release/releases/tag/v1.0.0)
+```text
+ghcr.io/daidaiya7/mediadock:1.1.0
+```
+
+- [下载 v1.1.0 部署资料](https://github.com/daidaiya7/media-dock-release/releases/tag/v1.1.0)
 - [配置清单](docs/CONFIGURATION.md) · [使用指南](docs/USAGE.md)
-- [使用问题与镜像获取咨询](https://github.com/daidaiya7/media-dock-release/issues)（请勿发送凭据）
+- [使用问题反馈](https://github.com/daidaiya7/media-dock-release/issues)（请勿发送凭据）
 
 ## 功能
 
@@ -20,24 +24,31 @@
 - 求片申请、管理员审核和兼容服务订阅对接。
 - 套餐、购买提醒、订单核对及卡密领取。
 - 闲鱼与小红书渠道适配，使用部署者自己的账号。
-- 首页公告、简介、教程与热门影片缓存。
+- 页面装修：站名、Logo、浏览器图标、首页文案、轮播图片与页脚。
+- 黑金夜间与浅色日间主题，支持按当地时间自动切换及图标手动切换。
+- 分类设置、可编辑使用教程、首页公告、简介与热门影片缓存。
 - 服务端监测和用户浏览器的 HTTPS 响应时间检测。
 - 独立数据卷与凭据卷，便于备份和迁移。
 
 ## Docker 部署
 
-以下步骤适用于已取得可用镜像的部署者。安装 Docker 与 Docker Compose v2，下载并解压发行页的部署资料，或克隆本仓库：
+安装 Docker 与 Docker Compose v2。镜像支持 `linux/amd64` 和 `linux/arm64`，适用于常见 x86-64 Linux 服务器、ARM64 设备，以及使用 Docker Desktop 的 Intel / Apple Silicon Mac 和 Windows 电脑。Windows 请启用 Linux 容器模式。
+
+下载并解压发行页的部署资料到固定文件夹，例如 Windows 的 `C:\MediaDock`。在包含 `compose.yaml` 的文件夹打开 PowerShell 或终端，再执行以下命令；不要在压缩包预览窗口或临时解压目录内直接编辑和部署。也可以克隆本仓库：
 
 ```sh
 git clone https://github.com/daidaiya7/media-dock-release.git
 cd media-dock-release
 ```
 
-```sh
-cp .env.example .env
-```
+创建环境配置文件：
 
-编辑 `.env`，将 `MEDIADOCK_IMAGE` 改为维护者提供的镜像及版本。私有镜像仓库使用你自己的只读拉取凭据登录，不要索取或共用维护者的管理 Token。首次部署先保留本机访问设置。
+| 系统 / 终端 | 命令 |
+| --- | --- |
+| macOS / Linux | `cp .env.example .env` |
+| Windows PowerShell | `Copy-Item .env.example .env` |
+
+镜像地址已填写，无需另找镜像或构建源码。首次部署保留本机访问设置，在 `compose.yaml` 所在目录执行：
 
 ```sh
 docker compose pull
@@ -52,6 +63,37 @@ ssh -L 59189:127.0.0.1:59189 user@your-server
 ```
 
 初始化完成后，填写自己的服务及凭据，再开放公网 HTTPS。默认套餐均禁用，需要核对价格、模板和交付方式后再启用。
+
+如需确认拉取的镜像，可单独执行 `docker pull ghcr.io/daidaiya7/mediadock:1.1.0`。若下载失败，先检查 Docker 主机能否连接 `ghcr.io`；下载访问条件与应用的业务服务配置无关。
+
+## 镜像仓库不可达时安装
+
+发行页同时提供 AMD64 与 ARM64 的离线镜像，安装脚本按 Docker 运行架构选择并校验 SHA-256，不需要镜像仓库账号。先把部署 ZIP 解压到固定文件夹（Windows 例如 `C:\MediaDock`），打开该目录的终端。
+
+Linux / macOS：
+
+```sh
+sh ./install.sh
+```
+
+Windows PowerShell：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+这里的执行策略参数仅对这次 PowerShell 进程生效。脚本下载当前版本的镜像、核对校验值、执行 `docker load`，然后以 `--pull never` 启动服务；不会覆盖已有 `.env` 或清除数据卷。升级已有部署时，先按下方升级说明修改已有 `.env` 的版本号。
+
+也可以在发行页手动下载对应架构的 `.tar.gz`，核对 `SHA256SUMS.txt` 后运行：
+
+```sh
+docker load -i mediadock-1.1.0-linux-amd64.tar.gz
+# 首次部署才复制；已有 .env 请保留。
+[ -f .env ] || cp .env.example .env
+docker compose up -d --pull never
+```
+
+Apple Silicon / ARM64 主机把文件名中的 `amd64` 换成 `arm64`。
 
 ## 公开访问
 
@@ -77,8 +119,18 @@ MEDIADOCK_NEXTEMBY_URL=https://nextemby.example.com
 
 备份与迁移必须保留两个卷，实际卷名通常带 Compose 项目前缀。不要执行 `docker compose down -v`，它会删除业务数据及密钥。不要把实例的 `.env`、凭据、订单数据库、备份或日志提交到 GitHub。
 
+## 升级到 1.1.0
+
+已有实例先按照 [备份说明](docs/USAGE.md#更新与备份) 保存数据卷与凭据卷，再把 `.env` 中的镜像改为：
+
+```dotenv
+MEDIADOCK_IMAGE=ghcr.io/daidaiya7/mediadock:1.1.0
+```
+
+使用本次发行的 `compose.yaml`，保留原 Compose 项目名和原有卷名，执行 `docker compose pull` 与 `docker compose up -d`。不要删除原数据卷，也不要用新下载的示例配置覆盖实例中的服务地址和账号设置。v1.0.0 仅发布了部署资料；当时尚未启动应用的用户直接按首次部署步骤安装即可。
+
 ## 发行与来源
 
-计划以容器镜像分发应用，当前发行包仅包含部署资料。本仓库不提供应用源码，也不表示镜像具有加密或防逆向能力。镜像持有人可提取分析其中的程序文件；需要保密的业务逻辑应由维护者托管。
+应用源码仓库保持私有，公开镜像提供可运行应用。本项目不承诺容器或编译程序无法被逆向；镜像持有人仍可分析其中的程序和前端资源。所有服务凭据均由部署者在自己的实例中配置。
 
 应用包含第三方及上游代码，随发行保留其 [许可证](LICENSE) 和 [来源声明](NOTICE)。上游已有的许可权利不因源码仓库私有而取消。

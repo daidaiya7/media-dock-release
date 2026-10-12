@@ -1,6 +1,6 @@
 services:
   mediadock:
-    image: ${MEDIADOCK_IMAGE:?请先填写维护者提供的镜像地址与版本}
+    image: ${MEDIADOCK_IMAGE:-ghcr.io/daidaiya7/mediadock:1.1.0}
     restart: unless-stopped
     init: true
     ports:
@@ -26,7 +26,7 @@ services:
     stop_grace_period: 30s
 
   scheduler:
-    image: ${MEDIADOCK_IMAGE:?请先填写维护者提供的镜像地址与版本}
+    image: ${MEDIADOCK_IMAGE:-ghcr.io/daidaiya7/mediadock:1.1.0}
     restart: unless-stopped
     init: true
     entrypoint: ["python", "scheduler.py"]
