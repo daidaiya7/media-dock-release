@@ -30,9 +30,38 @@ ghcr.io/daidaiya7/mediadock:1.1.0
 - 服务端监测和用户浏览器的 HTTPS 响应时间检测。
 - 独立数据卷与凭据卷，便于备份和迁移。
 
-## Docker 部署
+## 快速安装（推荐）
 
-**推荐首次安装使用下方安装脚本**：从 GitHub Release 下载镜像并校验、导入和启动，不需要镜像仓库账号。GHCR 镜像已上传，匿名拉取权限尚待开放；若下面的 `docker compose pull` 提示 denied，请直接使用「镜像仓库不可达时安装」。
+先安装 Docker 与 Docker Compose v2；Windows 的 Docker Desktop 请使用 Linux 容器模式。发行页同时提供 AMD64 与 ARM64 的离线镜像，安装脚本按 Docker 运行架构选择并校验 SHA-256，不需要镜像仓库账号。先把部署 ZIP 解压到固定文件夹（Windows 例如 `C:\MediaDock`），打开该目录的终端。
+
+Linux / macOS：
+
+```sh
+sh ./install.sh
+```
+
+Windows PowerShell：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+这里的执行策略参数仅对这次 PowerShell 进程生效。脚本下载当前版本的镜像、核对校验值、执行 `docker load`，然后以 `--pull never` 启动服务；不会覆盖已有 `.env` 或清除数据卷。升级已有部署时，先按下方升级说明修改已有 `.env` 的版本号。
+
+也可以在发行页手动下载对应架构的 `.tar.gz`，核对 `SHA256SUMS.txt` 后运行：
+
+```sh
+docker load -i mediadock-1.1.0-linux-amd64.tar.gz
+# 首次部署才复制；已有 .env 请保留。
+[ -f .env ] || cp .env.example .env
+docker compose up -d --pull never
+```
+
+Apple Silicon / ARM64 主机把文件名中的 `amd64` 换成 `arm64`。
+
+## Docker Compose 拉取部署
+
+**推荐首次安装使用上方安装脚本**：从 GitHub Release 下载镜像并校验、导入和启动，不需要镜像仓库账号。GHCR 镜像已上传，匿名拉取权限尚待开放；若下面的 `docker compose pull` 提示 denied，请直接使用「快速安装」。
 
 安装 Docker 与 Docker Compose v2。镜像支持 `linux/amd64` 和 `linux/arm64`，适用于常见 x86-64 Linux 服务器、ARM64 设备，以及使用 Docker Desktop 的 Intel / Apple Silicon Mac 和 Windows 电脑。Windows 请启用 Linux 容器模式。
 
@@ -67,35 +96,6 @@ ssh -L 59189:127.0.0.1:59189 user@your-server
 初始化完成后，填写自己的服务及凭据，再开放公网 HTTPS。默认套餐均禁用，需要核对价格、模板和交付方式后再启用。
 
 如需确认拉取的镜像，可单独执行 `docker pull ghcr.io/daidaiya7/mediadock:1.1.0`。若下载失败，先检查 Docker 主机能否连接 `ghcr.io`；下载访问条件与应用的业务服务配置无关。
-
-## 镜像仓库不可达时安装
-
-发行页同时提供 AMD64 与 ARM64 的离线镜像，安装脚本按 Docker 运行架构选择并校验 SHA-256，不需要镜像仓库账号。先把部署 ZIP 解压到固定文件夹（Windows 例如 `C:\MediaDock`），打开该目录的终端。
-
-Linux / macOS：
-
-```sh
-sh ./install.sh
-```
-
-Windows PowerShell：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install.ps1
-```
-
-这里的执行策略参数仅对这次 PowerShell 进程生效。脚本下载当前版本的镜像、核对校验值、执行 `docker load`，然后以 `--pull never` 启动服务；不会覆盖已有 `.env` 或清除数据卷。升级已有部署时，先按下方升级说明修改已有 `.env` 的版本号。
-
-也可以在发行页手动下载对应架构的 `.tar.gz`，核对 `SHA256SUMS.txt` 后运行：
-
-```sh
-docker load -i mediadock-1.1.0-linux-amd64.tar.gz
-# 首次部署才复制；已有 .env 请保留。
-[ -f .env ] || cp .env.example .env
-docker compose up -d --pull never
-```
-
-Apple Silicon / ARM64 主机把文件名中的 `amd64` 换成 `arm64`。
 
 ## 公开访问
 
