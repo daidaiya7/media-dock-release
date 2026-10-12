@@ -8,7 +8,7 @@
 
 **当前版本：1.1.0 · 已提供可直接安装的 Docker 镜像与安装脚本。**
 
-本仓库公开项目介绍、部署模板及使用说明，**不包含应用源码、账号或业务数据**。应用以容器镜像分发。公开发行页提供可直接导入的镜像与安装脚本，无需 GitHub Token。GHCR 镜像地址（匿名拉取权限待开放）：
+本仓库公开项目介绍、部署模板及使用说明，**不包含应用源码、账号或业务数据**。应用以容器镜像分发。公开发行页提供可直接导入的镜像与安装脚本，无需 GitHub Token。GHCR 镜像已公开，无需登录即可拉取，镜像地址：
 
 ```text
 ghcr.io/daidaiya7/mediadock:1.1.0
@@ -17,6 +17,39 @@ ghcr.io/daidaiya7/mediadock:1.1.0
 - [下载 v1.1.0 部署资料](https://github.com/daidaiya7/media-dock-release/releases/tag/v1.1.0)
 - [配置清单](docs/CONFIGURATION.md) · [使用指南](docs/USAGE.md)
 - [使用问题反馈](https://github.com/daidaiya7/media-dock-release/issues)（请勿发送凭据）
+
+## 1.1.0 更新亮点
+
+这次更新让每位部署者可以直接在后台打造自己的观影门户，同时补齐可用的 Docker 发行镜像。
+
+| 更新 | 使用方式与效果 |
+| --- | --- |
+| 页面装修 | 在「设置 → 站点与入口」修改站点名称、Logo、浏览器图标、首页文案、页脚与最多 6 张轮播图片 |
+| 昼夜主题 | 默认按访客当地时间自动切换；点击半明暗、太阳、月亮图标手动切换并记住选择 |
+| 设置分类 | 站点、收款、服务、公告、教程和线路监测分为六个标签，减少长页面查找 |
+| 教程编辑 | 按章节修改标题、正文、推荐软件和常见问题，预览后保存；保留连接示意图 |
+| 用户中心 | 恢复入口，未配置时给出提示，填写自己的地址后正常跳转 |
+| 发行与修复 | 提供 AMD64 / ARM64 镜像、离线安装与校验文件，修复自定义站点名称的 HTML 转义 |
+
+## 界面预览
+
+以下为 1.1.0 脱敏测试站实拍。新安装尚未配置 TMDB 或自定义轮播图片时，首页会显示图片准备提示；接入服务后展示实际内容。
+
+### 白天主题
+
+![影视服白天主题首页](docs/images/home-day.jpg)
+
+### 黑金夜间主题
+
+![影视服黑金夜间主题首页](docs/images/home-night.jpg)
+
+### 分类设置与页面装修
+
+![后台设置分类和站点名称图标编辑](docs/images/settings-decoration.jpg)
+
+### 使用教程编辑
+
+![后台使用教程章节编辑](docs/images/guide-editor.jpg)
 
 ## 功能
 
@@ -61,7 +94,7 @@ Apple Silicon / ARM64 主机把文件名中的 `amd64` 换成 `arm64`。
 
 ## Docker Compose 拉取部署
 
-**推荐首次安装使用上方安装脚本**：从 GitHub Release 下载镜像并校验、导入和启动，不需要镜像仓库账号。GHCR 镜像已上传，匿名拉取权限尚待开放；若下面的 `docker compose pull` 提示 denied，请直接使用「快速安装」。
+GHCR 支持匿名拉取，不需要 GitHub Token。网络无法访问镜像仓库时，可使用上方安装脚本，从 GitHub Release 下载并导入镜像。
 
 安装 Docker 与 Docker Compose v2。镜像支持 `linux/amd64` 和 `linux/arm64`，适用于常见 x86-64 Linux 服务器、ARM64 设备，以及使用 Docker Desktop 的 Intel / Apple Silicon Mac 和 Windows 电脑。Windows 请启用 Linux 容器模式。
 
