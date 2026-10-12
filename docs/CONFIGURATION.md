@@ -4,7 +4,7 @@
 
 | 项目 | 填写位置 | 初始状态 |
 | --- | --- | --- |
-| 容器镜像 | `.env` 的 `MEDIADOCK_IMAGE` | `ghcr.io/daidaiya7/mediadock:1.1.0`，公开拉取 |
+| 容器镜像 | `.env` 的 `MEDIADOCK_IMAGE` | `ghcr.io/daidaiya7/mediadock:1.1.0`；首次安装推荐运行安装脚本，从公开发行页导入镜像 |
 | 本站域名 | `.env` 的 `MEDIADOCK_PUBLIC_BASE_URL` | 本机地址 |
 | 管理员用户名 | `.env` 的 `MEDIADOCK_ADMIN_USERNAME` | `admin`，建议修改 |
 | 管理员密码 | 首次初始化页面 | 无通用密码 |
