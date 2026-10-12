@@ -1,0 +1,27 @@
+# 宿主机 Nginx 示例；替换域名及证书路径。首次管理员初始化后再启用。
+server {
+    listen 443 ssl;
+    server_name media.example.com;
+    ssl_certificate /etc/ssl/mediadock/fullchain.pem;
+    ssl_certificate_key /etc/ssl/mediadock/privkey.pem;
+
+    # 领取链接、订单与 API 请求不写入默认访问日志。
+    access_log off;
+    client_max_body_size 1m;
+
+    location / {
+        proxy_pass http://127.0.0.1:59189;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    listen 80;
+    server_name media.example.com;
+    return 301 https://$host$request_uri;
+}

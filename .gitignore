@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+data/
+secrets/
+backups/
+*.sqlite*
+*.db
+*.log
+*.zip
+__pycache__/

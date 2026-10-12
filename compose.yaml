@@ -1,0 +1,53 @@
+services:
+  mediadock:
+    image: ${MEDIADOCK_IMAGE:?请先填写维护者提供的镜像地址与版本}
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:59189:59189"
+    environment:
+      MEDIADOCK_DATA_DIR: /var/lib/mediadock/data
+      MEDIADOCK_SECRETS_DIR: /var/lib/mediadock/secrets
+      MEDIADOCK_PUBLIC_BASE_URL: ${MEDIADOCK_PUBLIC_BASE_URL:-http://127.0.0.1:59189}
+      MEDIADOCK_REQUIRE_HTTPS: ${MEDIADOCK_REQUIRE_HTTPS:-0}
+      MEDIADOCK_ADMIN_USERNAME: ${MEDIADOCK_ADMIN_USERNAME:-admin}
+      MEDIADOCK_NEXTEMBY_URL: ${MEDIADOCK_NEXTEMBY_URL:-https://nextemby.example.com}
+      MEDIADOCK_TRUSTED_PROXIES: ${MEDIADOCK_TRUSTED_PROXIES:-127.0.0.1}
+    volumes:
+      - mediadock-data:/var/lib/mediadock/data
+      - mediadock-secrets:/var/lib/mediadock/secrets
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 30s
+
+  scheduler:
+    image: ${MEDIADOCK_IMAGE:?请先填写维护者提供的镜像地址与版本}
+    restart: unless-stopped
+    init: true
+    entrypoint: ["python", "scheduler.py"]
+    healthcheck:
+      disable: true
+    environment:
+      MEDIADOCK_DATA_DIR: /var/lib/mediadock/data
+      MEDIADOCK_SECRETS_DIR: /var/lib/mediadock/secrets
+      MEDIADOCK_TIMEZONE: ${MEDIADOCK_TIMEZONE:-Asia/Shanghai}
+    volumes:
+      - mediadock-data:/var/lib/mediadock/data
+      - mediadock-secrets:/var/lib/mediadock/secrets
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 30s
+
+volumes:
+  mediadock-data:
+  mediadock-secrets:
