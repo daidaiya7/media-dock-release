@@ -6,6 +6,12 @@
 
 支持对接 Emby、NextEmby、NextFind 和 TMDB，并保留闲鱼、小红书渠道模块。服务地址、域名、Token、平台账号、商品和付款入口均由部署者自行配置。平台不附带影片、媒体服务账号、CDN 或支付渠道。
 
+## 项目定位与反馈
+
+本项目主要用于个人自托管影视服搭建。闲鱼相关能力借鉴了 [Christ9038/Ydisks-Xianyu-Helper](https://github.com/Christ9038/Ydisks-Xianyu-Helper)，并在此基础上加入了页面装修、主题、教程编辑、片库与订单等功能；感谢上游项目的工作，具体许可和来源请见 [NOTICE](NOTICE)。本项目与上游项目没有隶属或官方合作关系。
+
+如果你在自己的部署中遇到问题，或发现功能不好用，可以通过 Telegram 机器人 [@MUGLOWUserBot](https://t.me/MUGLOWUserBot) 联系反馈。请不要在公开 Issue 或聊天中发送站点密码、API Token、订单数据库或其他凭据。
+
 **当前版本：1.1.0 · 已提供可直接安装的 Docker 镜像与安装脚本。**
 
 本仓库公开项目介绍、部署模板及使用说明，**不包含应用源码、账号或业务数据**。应用以容器镜像分发。公开发行页提供可直接导入的镜像与安装脚本，无需 GitHub Token。GHCR 镜像已公开，无需登录即可拉取，镜像地址：
@@ -16,7 +22,15 @@ ghcr.io/daidaiya7/mediadock:1.1.0
 
 - [下载 v1.1.0 部署资料](https://github.com/daidaiya7/media-dock-release/releases/tag/v1.1.0)
 - [配置清单](docs/CONFIGURATION.md) · [使用指南](docs/USAGE.md)
-- [使用问题反馈](https://github.com/daidaiya7/media-dock-release/issues)（请勿发送凭据）
+- [使用问题反馈](https://github.com/daidaiya7/media-dock-release/issues) · [Telegram 机器人 @MUGLOWUserBot](https://t.me/MUGLOWUserBot)（请勿发送凭据）
+
+## 项目定位与来源
+
+本项目主要用于搭建和管理自己的媒体服务，适合已经有媒体库、用户中心或相关服务，需要一个统一观影入口的部署者。它不是公共影片资源或托管服务，实际可用内容、账号权限、线路和套餐都由部署者自行配置。
+
+本项目借鉴了 [Christ9038/Ydisks-Xianyu-Helper](https://github.com/Christ9038/Ydisks-Xianyu-Helper)，并在此基础上加入了影视库展示、求片订阅、页面装修、教程编辑、主题切换、订单与卡密交付等功能。上游来源和许可证信息见 [NOTICE](NOTICE) 与 [LICENSE](LICENSE)。
+
+遇到安装、配置或使用问题，可以先提交 [GitHub Issue](https://github.com/daidaiya7/media-dock-release/issues)，也可以联系 Telegram 机器人 [@MUGLOWUserBot](https://t.me/MUGLOWUserBot)。请勿发送密码、Token、卡密、订单数据库、`.env` 或其他敏感信息。
 
 ## 1.1.0 更新亮点
 
