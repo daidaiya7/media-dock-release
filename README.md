@@ -10,7 +10,7 @@
 
 本项目主要用于个人自托管影视服搭建。闲鱼相关能力借鉴了 [Christ9038/Ydisks-Xianyu-Helper](https://github.com/Christ9038/Ydisks-Xianyu-Helper)，并在此基础上加入了页面装修、主题、教程编辑、片库与订单等功能；感谢上游项目的工作，具体许可和来源请见 [NOTICE](NOTICE)。本项目与上游项目没有隶属或官方合作关系。
 
-如果你在自己的部署中遇到问题，或发现功能不好用，可以通过 Telegram 机器人 [@MUGLOWUserBot](https://t.me/MUGLOWUserBot) 联系反馈。请不要在公开 Issue 或聊天中发送站点密码、API Token、订单数据库或其他凭据。
+如果你在自己的部署中遇到问题，或发现功能不好用，可以通过 Telegram 私聊机器人 [@daidai_notifybot](https://t.me/daidai_notifybot) 联系反馈。请不要在公开 Issue 或聊天中发送站点密码、API Token、订单数据库或其他凭据。
 
 **当前版本：1.1.0 · 已提供可直接安装的 Docker 镜像与安装脚本。**
 
@@ -22,7 +22,7 @@ ghcr.io/daidaiya7/mediadock:1.1.0
 
 - [下载 v1.1.0 部署资料](https://github.com/daidaiya7/media-dock-release/releases/tag/v1.1.0)
 - [配置清单](docs/CONFIGURATION.md) · [使用指南](docs/USAGE.md)
-- [使用问题反馈](https://github.com/daidaiya7/media-dock-release/issues) · [Telegram 机器人 @MUGLOWUserBot](https://t.me/MUGLOWUserBot)（请勿发送凭据）
+- [使用问题反馈](https://github.com/daidaiya7/media-dock-release/issues) · [Telegram 私聊机器人 @daidai_notifybot](https://t.me/daidai_notifybot)（请勿发送凭据）
 
 ## 1.1.0 更新亮点
 
