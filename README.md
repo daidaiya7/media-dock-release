@@ -24,14 +24,6 @@ ghcr.io/daidaiya7/mediadock:1.1.0
 - [配置清单](docs/CONFIGURATION.md) · [使用指南](docs/USAGE.md)
 - [使用问题反馈](https://github.com/daidaiya7/media-dock-release/issues) · [Telegram 机器人 @MUGLOWUserBot](https://t.me/MUGLOWUserBot)（请勿发送凭据）
 
-## 项目定位与来源
-
-本项目主要用于搭建和管理自己的媒体服务，适合已经有媒体库、用户中心或相关服务，需要一个统一观影入口的部署者。它不是公共影片资源或托管服务，实际可用内容、账号权限、线路和套餐都由部署者自行配置。
-
-本项目借鉴了 [Christ9038/Ydisks-Xianyu-Helper](https://github.com/Christ9038/Ydisks-Xianyu-Helper)，并在此基础上加入了影视库展示、求片订阅、页面装修、教程编辑、主题切换、订单与卡密交付等功能。上游来源和许可证信息见 [NOTICE](NOTICE) 与 [LICENSE](LICENSE)。
-
-遇到安装、配置或使用问题，可以先提交 [GitHub Issue](https://github.com/daidaiya7/media-dock-release/issues)，也可以联系 Telegram 机器人 [@MUGLOWUserBot](https://t.me/MUGLOWUserBot)。请勿发送密码、Token、卡密、订单数据库、`.env` 或其他敏感信息。
-
 ## 1.1.0 更新亮点
 
 这次更新让每位部署者可以直接在后台打造自己的观影门户，同时补齐可用的 Docker 发行镜像。
